@@ -12,7 +12,7 @@ Esse projeto foi desenvolvido com essas tecnologias:
 
 Você pode visualizar o layout básico do projeto através desse [link](<https://www.figma.com/file/7yKYdkwtfzWla0Ba2uNABV/dev.finance%24-Maratona-Discover-(Copy)?node-id=0%3A1>).
 
-## :new_moon_with_face: **Discover**
+## :new_moon: **Discover**
 
 O Discover é dividido em três cursos.
 
@@ -26,8 +26,6 @@ O projeto atual foi desenvolvido durante o curso Fundamentar da Rocketseat.
 
 E esse projeto pretende aprimora os conhecimentos adquirido em todos os módulos.
 
-## :ringed_planet: **Desafio**
-
-### Sobre o projeto:
+## :ringed_planet: **Sobre o projeto**
 
 - Neste projeto devemos construir um site sobre finança, onde uma pessoa poderá ter um balanço financeiro do seu gastos.
