@@ -8,15 +8,11 @@ Esse projeto foi desenvolvido com essas tecnologias:
 - [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
 - [JAVASCRIPT](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 
----
-
 ## 🎨 **Layout**
 
 Você pode visualizar o layout básico do projeto através desse [link](<https://www.figma.com/file/7yKYdkwtfzWla0Ba2uNABV/dev.finance%24-Maratona-Discover-(Copy)?node-id=0%3A1>).
 
 ## :new_moon_with_face: **Discover**
-
----
 
 O Discover é dividido em três cursos.
 
