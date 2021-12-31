@@ -14,7 +14,7 @@ Você pode visualizar o layout básico do projeto através desse [link](<https:/
 
 ## :new_moon: **Discover**
 
-O Discover é dividido em três cursos.
+O Discover da Rocketseat é dividido em três cursos.
 
 - Conectar -> 4 hrs
 - Fundamentar -> 30 hrs
