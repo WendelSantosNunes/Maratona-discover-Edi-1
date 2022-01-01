@@ -50,7 +50,7 @@
       <section id="transaction">
         <h2 class="sr-only">Transações</h2>
 
-        <a href="#" class="button new" onclick="Modal.open()"
+        <a href="#" class="button new" onclick="Modal.open_close()"
           >+ Nova Transação</a
         >
 
@@ -64,7 +64,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <!-- <tr>
               <td class="description">Luiz</td>
               <td class="expense">- R$ 500,00</td>
               <td class="date">23/01/2021</td>
@@ -81,7 +81,7 @@
               <td class="expense">- R$ 200,00</td>
               <td class="date">23/01/2021</td>
               <td><img src="./assets/minus.svg" alt="Remover transação" /></td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </section>
@@ -124,7 +124,7 @@
             </div>
 
             <div class="input-group actions">
-              <a href="#" class="button cancel" onclick="Modal.close()"
+              <a href="#" class="button cancel" onclick="Modal.open_close()"
                 >Cancelar</a
               >
               <button>Salvar</button>
