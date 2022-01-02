@@ -11,32 +11,29 @@ const Modal = {
   }
 }
 
-const transactions = [
-  {
-    id: 1,
-    description: 'Luz',
-    amount: -50000,
-    date: '23/01/2021'
+const Storage = {
+  get() {
+    return JSON.parse(localStorage.getItem('dev.finances:transactions')) || []
   },
-  {
-    id: 2,
-    description: 'Criação website',
-    amount: 500000,
-    date: '23/01/2021'
-  },
-  {
-    id: 3,
-    description: 'Internet',
-    amount: -20000,
-    date: '23/01/2021'
+  set(transaction) {
+    localStorage.setItem(
+      'dev.finances:transactions',
+      JSON.stringify(transaction)
+    )
   }
-]
+}
 
 const Transaction = {
-  all: transactions,
+  all: Storage.get(),
 
   add(transaction) {
     Transaction.all.push(transaction)
+
+    App.reload()
+  },
+
+  remove(index) {
+    Transaction.all.splice(index, 1)
 
     App.reload()
   },
@@ -78,13 +75,17 @@ const Transaction = {
 
 const DOM = {
   transactionsContainer: document.querySelector('#data-table tbody'),
+
   addTransaction(transaction, index) {
     const tr = document.createElement('tr')
-    tr.innerHTML = DOM.innerHTMLTransaction(transaction)
+
+    tr.innerHTML = DOM.innerHTMLTransaction(transaction, index)
+    tr.dataset.index = index // Posição do array
 
     DOM.transactionsContainer.appendChild(tr)
   },
-  innerHTMLTransaction(transaction) {
+
+  innerHTMLTransaction(transaction, index) {
     const CSSclass = transaction.amount > 0 ? 'income' : 'expense'
 
     const amout = Utils.formatCurrency(transaction.amount)
@@ -94,7 +95,7 @@ const DOM = {
       <td class=${CSSclass}>${amout}</td>
       <td class="date">${transaction.date}</td>
       <td>
-        <img src="./assets/minus.svg" alt="Remover transação" />
+        <img onclick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover transação" />
       </td>
     `
     return html
@@ -129,16 +130,98 @@ const Utils = {
     })
 
     return signal + ' ' + value
+  },
+
+  formatAmount(value) {
+    value = value = Number(value.replace(/\,\./g, '')) * 100
+    return value
+  },
+
+  formatDate(value) {
+    const splitteDate = value.split('-')
+    return `${splitteDate[2]}/${splitteDate[1]}/${splitteDate[0]}`
+  }
+}
+
+const Form = {
+  description: document.querySelector('input#description'),
+  amount: document.querySelector('input#amount'),
+  date: document.querySelector('input#date'),
+
+  getValues() {
+    return {
+      description: Form.description.value,
+      amount: Form.amount.value,
+      date: Form.date.value
+    }
+  },
+
+  validateFields() {
+    // Desestruturando um objeto
+    const { description, amount, date } = Form.getValues()
+
+    if (
+      description.trim() === '' ||
+      amount.trim() === '' ||
+      date.trim() === ''
+    ) {
+      throw new Error('Por favor, preencha todos os campos')
+    }
+  },
+
+  formatValues() {
+    let { description, amount, date } = Form.getValues()
+
+    amount = Utils.formatAmount(amount)
+    date = Utils.formatDate(date)
+
+    return {
+      description,
+      amount,
+      date
+    }
+  },
+
+  saveTransaction(value) {
+    Transaction.add(value)
+  },
+
+  clearFields() {
+    Form.description.value = ''
+    Form.amount.value = ''
+    Form.date.value = ''
+  },
+
+  submit(event) {
+    event.preventDefault()
+
+    try {
+      // Verificar se todas as informações foram preenchidas
+      Form.validateFields()
+      // formatar os dados para salvar
+      const trasaction = Form.formatValues()
+      // salvar
+      Form.saveTransaction(trasaction)
+      // apagar os dados do formulário
+      Form.clearFields()
+      // modal feche
+      Modal.open_close()
+      // Atualizar a aplicação.
+    } catch (error) {
+      alert(error.message)
+    }
   }
 }
 
 const App = {
   init() {
-    Transaction.all.forEach(transactions => {
-      DOM.addTransaction(transactions)
+    Transaction.all.forEach((transactions, index) => {
+      DOM.addTransaction(transactions, index)
     })
 
     DOM.updateBalance()
+
+    Storage.set(Transaction.all)
   },
   reload() {
     DOM.clearTransactions()
@@ -147,10 +230,3 @@ const App = {
 }
 
 App.init()
-
-Transaction.add({
-  id: 39,
-  description: 'Hello',
-  amount: 200,
-  date: '23/01/2021'
-})
