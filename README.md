@@ -1,5 +1,7 @@
 # Maratona discover - Edição 1
 
+![Página Principal com sidebar-fechado](https://github.com/WendelSantosNunes/Maratona-discover-Edi-1/blob/main/assets/imgReadme/Captura%20de%20tela%20de%202022-01-02%2015-10-40.png?raw=true)
+
 ## 💻 **Tecnologias**
 
 Esse projeto foi desenvolvido com essas tecnologias:
